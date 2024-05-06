@@ -1,9 +1,9 @@
 // import {  } from "../infrastructure/repositories/products";
-import { IProductsRepository} from "../domain/repositories/products";
-import { Product } from "../domain/models/products";
-import { IProductService} from "../domain/services/products";
+import { IProductsRepository} from "../../domain/repositories/products";
+import { Product } from "../../domain/models/products";
+import { IProductService} from "./interfaces";
 
-export class ProductService implements IProductService {
+export class ProductsService implements IProductService {
     productsRepo: IProductsRepository
 
     constructor(productsRepo: IProductsRepository) {

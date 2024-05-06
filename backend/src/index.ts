@@ -1,14 +1,21 @@
 import "dotenv/config";
 import express, { Express, Request, Response } from "express";
-import { productsRouter } from "./modules/products/infrastructure/ProductsRoutes";
+import { ProductsController } from "./modules/products/infrastructure/controllers/products";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
+const productsController = new ProductsController();
+
+// Database
+import "./shared/infrastructure/database/typeorm/index";
+
 // Middlewares
 app.use(express.json());
 
-app.use('/products', productsRouter);
+// Routes
+console.log('path is:', productsController.path)
+app.use(productsController.path, productsController.router);
 
 app.get('/', (req: Request, res: Response) => {
     res.json({ msg: "Welcome to Feat it" })

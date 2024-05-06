@@ -1,9 +1,8 @@
-import {IProductsRepository} from "../domain/ProductsRepository";
-import {Product} from "../../../shared/infrastructure/database/typeorm/entities/Products.entity";
-import {appDataSource} from "../../../shared/infrastructure/database/typeorm";
-import {EntityManager, Repository} from "typeorm";
+import { IProductsRepository } from "../../domain/repositories/products";
+import { Product } from "../../../../shared/infrastructure/database/typeorm/entities/Products.entity";
+import { EntityManager, Repository } from "typeorm";
 
-class ProductsRepository extends Repository<Product> implements IProductsRepository {
+export class ProductsRepository extends Repository<Product> implements IProductsRepository {
     
     private repo: Repository<Product>
     
@@ -73,10 +72,4 @@ class ProductsRepository extends Repository<Product> implements IProductsReposit
             throw Error("Error updating product")
         }
     }
-}
-
-const productsRepository = new ProductsRepository(appDataSource.manager)
-
-export {
-    productsRepository,
 }
