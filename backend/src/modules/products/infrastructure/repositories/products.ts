@@ -20,11 +20,11 @@ export class ProductsRepository extends Repository<Product> implements IProducts
         }
     }
 
-    async getProductById(id: string): Promise<Product> {
+    async getProductById(id: string): Promise<Product | null> {
         try {
             const product = await this.repo.findOneBy({ id })
             if (!product) {
-                throw Error("Product was not found")
+                return null
             }
             return product;
         } catch (err) {
@@ -45,9 +45,14 @@ export class ProductsRepository extends Repository<Product> implements IProducts
         }
     }
 
-    async deleteProduct(id: string): Promise<Product> {
+    async deleteProduct(id: string): Promise<Product | null> {
         try {
             const product= await this.getProductById(id)
+
+            if (!product) {
+                return null
+            }
+
             await this.repo.delete({id})
             return product
         } catch (err) {
@@ -56,9 +61,14 @@ export class ProductsRepository extends Repository<Product> implements IProducts
         }
     }
 
-    async updateProduct(updatedProductInfo: Product): Promise<Product> {
+    async updateProduct(updatedProductInfo: Product): Promise<Product | null> {
         try {
             const product = await this.getProductById(updatedProductInfo.id)
+
+            if (!product) {
+                return null
+            }
+
             product.cost = updatedProductInfo.cost
             product.name = updatedProductInfo.name
             product.description = updatedProductInfo.description

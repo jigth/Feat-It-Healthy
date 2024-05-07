@@ -38,6 +38,12 @@ export class ProductsController {
         try {
             const id = req.params.id;
             const product = await this.productsSvc.getProductById(id);
+
+            if (!product) {
+                res.status(404).send({ error: "Product not found" })
+                return
+            }
+
             res.status(200).send({ product });
         } catch (err) {
             console.log(err)

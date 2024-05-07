@@ -19,7 +19,7 @@ export class ProductsService implements IProductService {
         }
     }
 
-    async getProductById(id: string): Promise<Product> {
+    async getProductById(id: string): Promise<Product | null> {
         try {
             return await this.productsRepo.getProductById(id)
         } catch (err) {
@@ -37,7 +37,7 @@ export class ProductsService implements IProductService {
         }
     }
 
-    async updateProduct(updatedProductInfo: Product): Promise<Product> {
+    async updateProduct(updatedProductInfo: Product): Promise<Product | null> {
         try {
             return await this.productsRepo.updateProduct(updatedProductInfo)
         } catch (err) {
@@ -46,7 +46,7 @@ export class ProductsService implements IProductService {
         }
     }
 
-    async deleteProduct(id: string): Promise<Product> {
+    async deleteProduct(id: string): Promise<Product | null> {
         try {
             return await this.productsRepo.deleteProduct(id)
         } catch (err) {
