@@ -21,7 +21,11 @@
     "strict": true,
 
     /* Completeness */
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    /* TypeORM related options */
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
   },
 
   "include": [
