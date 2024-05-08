@@ -10,3 +10,9 @@ body {
     margin: 0;
     padding:0;
 } 
+
+/* Revert some browser defaults to have default behavior on some elements */
+ul, li, ol, button {
+    margin: revert;
+    padding: revert;
+}
