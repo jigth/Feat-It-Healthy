@@ -8,7 +8,7 @@ import Hello from "../shared/components/Hello.vue"
 const welcomeMessage: string = "Welcome to Feat It";
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 h1 {
     color: blue;
 }

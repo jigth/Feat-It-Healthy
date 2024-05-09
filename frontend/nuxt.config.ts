@@ -4,6 +4,12 @@ const assetsDir = "src/shared/assets";
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  runtimeConfig: {
+    public: {
+      backendMicroservice: process.env.NUXT_PUBLIC_BACKEND_MICROSERVICE
+    }
+  },
+
   modules: [
     ['@nuxtjs/google-fonts', {
       families: {
