@@ -4,19 +4,19 @@
     <h2 style="text-align: center; margin-bottom: 1rem;">New Product</h2>
     <form class="product-form">
         <div class="product-form__item">
-            <input type="text" v-model="productFormData.name" placeholder="name">
+            <input type="text" v-model="productFormData.name" placeholder="Name">
         </div>
         <div class="product-form__item">
-            <textarea v-model="productFormData.description" style="width: 300px; height: 100px;" placeholder="description"></textarea>
+            <textarea v-model="productFormData.description" placeholder="Description"></textarea>
         </div>
         <div class="product-form__item">
-            <input type="text" v-model="productFormData.cost" min="1" placeholder="cost">
+            <input type="text" v-model="productFormData.cost" min="1" placeholder="Cost">
         </div>
         <div class="product-form__item">
-            <input type="text" v-model="productFormData.inventory" placeholder="inventory">
+            <input type="text" v-model="productFormData.inventory" placeholder="Inventory">
         </div>
         <div class="product-form__item">
-            <input type="file" placeholder="image url" class="upload">
+            <input type="text" v-model="productFormData.imageUrl" placeholder="Image URL">
         </div>
 
         <button @click.prevent="createProduct" class="product-form__item product-form__button">
@@ -31,6 +31,14 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios';
+
+const config = useRuntimeConfig()
+
+const axiosClient = axios.create({
+    baseURL: config.public.backendMicroservice,
+});
+
 type Product = {
     name: string;
     description: string;
@@ -39,22 +47,16 @@ type Product = {
     imageUrl: string;
 }
 
-const products = ref<Product[]>([
-    {
-        name: "Chicken",
-        description: "Full pasture raised chicken weighting between 1kg and 2.5kg",
-        cost: 500,
-        inventory: 12+1,
-        imageUrl: "https://d2d8wwwkmhfcva.cloudfront.net/800x/filters:fill(FFF,true):format(jpg)/d2lnr5mha7bycj.cloudfront.net/product-image/file/large_5dd910bd-17df-4c2c-91a6-1ee0f8652d56.png"
-    },
-    {
-        name: "Almonds",
-        description: "Delicious fresh premium Almonds harvested in the North",
-        cost: 1000,
-        inventory: 288,
-        imageUrl: "https://images.immediate.co.uk/production/volatile/sites/30/2021/02/almonds-9e25ce7.jpg?quality=90&resize=556,505"
-    },
-]);
+const products = ref<Product[]>([]);
+
+onMounted(async() => {
+    try {
+        const productList = await axiosClient.get('/products')
+        products.value = productList.data?.products ?? [];
+    } catch (err) {
+        console.log(err)
+    }
+})
 
 const productFormData = ref<Product>({
     name: '',
@@ -64,7 +66,7 @@ const productFormData = ref<Product>({
     imageUrl: ''
 });
 
-const cleanProductForm = () => {
+const cleanProductForm = (): void => {
     productFormData.value = {
         name: '',
         cost: undefined,
@@ -73,9 +75,56 @@ const cleanProductForm = () => {
         imageUrl: ''
     };
 }
-const createProduct = () => {
-    console.log('product created', Object.values(productFormData.value));
-    cleanProductForm()
+
+const validateProductInput = (product: Product): { ok: boolean, msg: string } => {
+    console.log('Validating URL')
+    const urlRegex: RegExp = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+    if (!urlRegex.test(product.imageUrl)) 
+        return { 
+            ok: false,
+            msg: 'Validation failed: "imageURL" does Not match an internet URL pattern'
+        };
+    
+    console.log('Validating numeric values')
+    if (!product.cost || !product.inventory || !(product.cost >= 1) || !(product.inventory >= 1))
+        return { 
+            ok: false,
+            msg: 'Validation failed: Either "cost" or "inventory" are not positive numbers'
+        };
+    
+    console.log('Validating empty fields')
+    if (
+        product.name.length <= 0 || !product.cost || product.description.length <= 0
+        || !product.inventory || product.imageUrl.length <= 0
+    )
+        return {
+            ok: false,
+            msg: 'Validation failed: Check that none of the product fields are empty'
+        }
+
+    return { ok: true, msg: '' }
+}
+
+const createProduct = (): void => {
+    const validation: { ok: boolean, msg: string } = validateProductInput(productFormData.value)
+
+    if (!validation.ok) {
+        alert(validation.msg)
+        return
+    }
+
+    axiosClient.post(`/products`, productFormData.value)
+        .then((res) => {
+            console.log({res})
+            console.log('product created', Object.values(productFormData.value))
+            products.value.push(productFormData.value)
+            cleanProductForm()
+            alert('Product created!')
+        })
+        .catch((err) => {
+            console.log(err)
+            alert('Couldn\'t create the product, please check your internet connection or contact support')
+        })
 }
 </script>
 
@@ -98,6 +147,8 @@ const createProduct = () => {
 
         textarea {
             padding: 0.5rem;
+            width: 300px;
+            height: 100px;
         }
     }
 
