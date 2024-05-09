@@ -1,4 +1,6 @@
 import "dotenv/config";
+import morgan from 'morgan';
+import cors from 'cors';
 import express, { Express, Request, Response } from "express";
 import { ProductsController } from "./modules/products/infrastructure/controllers/products";
 
@@ -12,9 +14,10 @@ import "./shared/infrastructure/database/typeorm/index";
 
 // Middlewares
 app.use(express.json());
+app.use(cors());
+app.use(morgan('dev'));
 
 // Routes
-console.log('path is:', productsController.path)
 app.use(productsController.path, productsController.router);
 
 app.get('/', (req: Request, res: Response) => {
