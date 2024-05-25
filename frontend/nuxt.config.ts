@@ -5,8 +5,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   runtimeConfig: {
+    FB_API_KEY: process.env.FB_API_KEY,
     public: {
-      backendMicroservice: process.env.NUXT_PUBLIC_BACKEND_MICROSERVICE
+      backendMicroservice: process.env.NUXT_PUBLIC_BACKEND_MICROSERVICE,
     }
   },
 
@@ -22,6 +23,7 @@ export default defineNuxtConfig({
   // Keep some dirs under src, but the rest of them are in their default location
   dir: {
     pages: "src/pages",
+    plugins: "src/shared/plugins",
     layouts: "src/shared/layouts",
     assets: `${assetsDir}`,
   },
