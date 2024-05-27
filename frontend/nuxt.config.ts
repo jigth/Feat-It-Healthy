@@ -40,10 +40,4 @@ export default defineNuxtConfig({
     }
   },
 
-  nitro: {
-    output: {
-      dir: "dist"
-    }
-  }
-
 })
