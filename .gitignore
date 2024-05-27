@@ -1,1 +1,5 @@
+# IDEs and code editors
 .idea
+
+# Local Netlify folder
+.netlify
