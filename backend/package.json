@@ -13,8 +13,8 @@
     "typeorm:migration:run": "yarn typeorm:cli migration:run -d src/shared/infrastructure/database/typeorm/config.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Daniel Ochoa Montes",
+  "license": "All Rights Reserved",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
