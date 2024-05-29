@@ -31,11 +31,12 @@ const migrationName = args[migrationsIndex].split('=')[1];
 const migrationPath = path.join(...typeormMigrationsPath.split('/'), migrationName);
 const configPath = path.join(...typeormConfigPath.split('/'));
 
-const command = `ts-node ./node_modules/typeorm/cli migration:generate ${migrationPath} -d ${configPath}`;
+const command = `npx ts-node ./node_modules/typeorm/cli migration:generate ${migrationPath} -d ${configPath}`;
 
 exec(command, (error, stdout, stderr) => {
   if (error) {
     console.error(`Error executing command: ${error.message}`);
+    console.log(stdout)
     process.exit(1);
   }
   if (stderr) {
