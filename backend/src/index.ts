@@ -1,16 +1,15 @@
 import "dotenv/config";
 import morgan from 'morgan';
 import cors from 'cors';
-import express, { Express, Request, Response } from "express";
-import { ProductsController } from "./modules/products/infrastructure/controllers/products";
+import express, { Express } from "express";
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
-const productsController = new ProductsController();
 
 // Database
 import "./shared/infrastructure/database/typeorm/index";
+import { loadAppRoutes } from "./shared/infrastructure/routes/loadAppRoutes";
 
 // Middlewares
 app.use(express.json());
@@ -18,11 +17,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // Routes
-app.use(productsController.path, productsController.router);
-
-app.get('/', (req: Request, res: Response) => {
-    res.json({ msg: "Welcome to Feat it" })
-});
+loadAppRoutes(app);
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
