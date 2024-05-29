@@ -5,13 +5,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js",
+    "start": "npm run build && npm run typeorm:migration:run && node build/index.js",
     "dev": "nodemon",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typeorm:cli": "ts-node ./node_modules/typeorm/cli",
+    "typeorm:migration:generate": "ts-node src/shared/infrastructure/database/typeorm/scripts/generate-migration.ts",
+    "typeorm:migration:run": "yarn typeorm:cli migration:run -d src/shared/infrastructure/database/typeorm/config.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Daniel Ochoa Montes",
+  "license": "UNLICENSED",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
