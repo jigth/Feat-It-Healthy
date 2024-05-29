@@ -5,8 +5,8 @@ Backend of the app, to see its description visit [Feat It Healthy repo root](htt
 
 ## Requirements
 
-* Yarn (you may use a different package manager if you wish but compatibility is not guaranteed 100%).
-
+* **NPM:** For running npx in some scripts.
+* **Yarn:** For package management (you may use a different package manager if you wish but compatibility is not guaranteed 100%).
 
 ## Running commands:
 
@@ -54,7 +54,9 @@ You can always run the script directly if you prefer:
 Using the automated way:
 
 ```shell
-$ yarn typeorm:migration:generate -- --migration=your-migration-name
+$ yarn typeorm:migration:generate --migration=your_migration_name
+# Or
+$ npm run typeorm:migration:generate -- --migration=your-migration-name
 ```
 
 Using the TypeORM script directly:
