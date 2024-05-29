@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js",
+    "start": "npm run build && npm run typeorm:migration:run && node build/index.js",
     "dev": "nodemon",
     "lint": "eslint .",
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli",
@@ -14,7 +14,7 @@
   },
   "keywords": [],
   "author": "Daniel Ochoa Montes",
-  "license": "All Rights Reserved",
+  "license": "UNLICENSED",
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
