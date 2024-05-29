@@ -14,13 +14,12 @@ export default new DataSource({
     username: process.env.PG_USER,
     password: process.env.PG_PASSWORD,
     database: process.env.PG_DB_NAME,
-
-    entities: ["src/**/entities/*.entity.ts"],
-    migrations: ["src/**/migrations/*.ts"],
+    entities: [__dirname + "/../**/entities/*.entity.{js,ts}"],
+    migrations: [__dirname + "/../**/migrations/*.{js,ts}"],
     synchronize: Boolean(process.env.SYNCHRONIZE) || false,
     logging: false,
     ssl: {
         rejectUnauthorized: true,
         ca: process.env.PG_CA_CERT,
     }
-})
+});
