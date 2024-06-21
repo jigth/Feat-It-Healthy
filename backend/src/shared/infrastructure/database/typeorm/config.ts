@@ -1,11 +1,13 @@
 import { DataSource } from 'typeorm'
-import { Product } from './entities/Products.entity';
 
 // Dotenv (originally used in the main index.ts file) is also used
 // in this file to help scripts dependent on this file load all env
 // variables correctly.
 import * as dotenv from 'dotenv';
 dotenv.config()
+
+// The following setting is not recommended to use for security reasons, but it is here for deployment convenience.
+const bypassSSLVerification = /true/i.test(process.env.BYPASS_SSL_VERIFICATION ?? '')
 
 export default new DataSource({
     type: "postgres",
@@ -19,7 +21,7 @@ export default new DataSource({
     synchronize: Boolean(process.env.SYNCHRONIZE) || false,
     logging: false,
     ssl: {
-        rejectUnauthorized: true,
+        rejectUnauthorized: !bypassSSLVerification,
         ca: process.env.PG_CA_CERT,
     }
 });
