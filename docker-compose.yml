@@ -1,0 +1,28 @@
+services:
+  backend:
+    image: ${BACKEND_IMAGE_FEAT_IT:-feat-it-backend}
+    ports:
+      - ${FEAT_IT_BACKEND_PORT:-5000}:5000 # It loads environment variable or default port value 5000 (see: "shell parameter substitution")
+    environment:
+      - PORT=5000
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_DB_NAME=${PG_DB_NAME}
+      - PG_CA_CERT=${PG_CA_CERT}
+      - BYPASS_SSL_VERIFICATION=${BYPASS_SSL_VERIFICATION}
+    
+  frontend:
+    image: ${FRONTEND_IMAGE_FEAT_IT:-feat-it-frontend}
+    depends_on:
+      - backend
+    ports:
+      - ${FEAT_IT_FRONTEND_PORT:-3000}:3000 # It loads environment variable or default port value 5000 (see: "shell parameter substitution")
+    environment:
+      - NUXT_PUBLIC_BACKEND_MICROSERVICE=${NUXT_PUBLIC_BACKEND_MICROSERVICE:-backend}
+      - FB_API_KEY=${FB_API_KEY}
+      - FB_APP_ID=${FB_APP_ID}
+      - FB_MEASUREMENT_ID=${FB_MEASUREMENT_ID}
+      - FB_AUTH_DOMAIN=${FB_AUTH_DOMAIN}
+      - FB_PROJECT_ID=${FB_PROJECT_ID}
+      - FB_STORAGE_BUCKET=${FB_STORAGE_BUCKET}
+      - FB_MESSAGING_SENDER_ID=${FB_MESSAGING_SENDER_ID}
