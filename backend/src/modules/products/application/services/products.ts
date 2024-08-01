@@ -15,7 +15,7 @@ export class ProductsService implements IProductService {
             return await this.productsRepo.getAll()
         } catch (err) {
             console.log(err)
-            throw Error("Error while getting products")
+            throw new Error("Error while getting products")
         }
     }
 
@@ -24,7 +24,7 @@ export class ProductsService implements IProductService {
             return await this.productsRepo.getProductById(id)
         } catch (err) {
             console.log(err)
-            throw Error("Error while getting the product")
+            throw new Error("Error while getting the product")
         }
     }
 
@@ -33,7 +33,7 @@ export class ProductsService implements IProductService {
             return await this.productsRepo.createProduct(productInfo)
         } catch (err) {
             console.log(err)
-            throw Error("Error while creating the product")
+            throw new Error("Error while creating the product")
         }
     }
 
@@ -42,7 +42,7 @@ export class ProductsService implements IProductService {
             return await this.productsRepo.updateProduct(updatedProductInfo)
         } catch (err) {
             console.log(err)
-            throw Error("Error while updating the product")
+            throw new Error("Error while updating the product")
         }
     }
 
@@ -51,7 +51,7 @@ export class ProductsService implements IProductService {
             return await this.productsRepo.deleteProduct(id)
         } catch (err) {
             console.log(err)
-            throw Error("Error while deleting the product")
+            throw new Error("Error while deleting the product")
         }
     }
 }

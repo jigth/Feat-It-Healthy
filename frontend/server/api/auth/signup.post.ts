@@ -1,4 +1,4 @@
-import { signupWithEmail } from "~/src/shared/modules/auth/infrastructure/firebase"
+import { signUpWithEmail } from "~/src/shared/modules/auth/infrastructure/firebase"
 import { getFirebaseAuth } from "~/src/shared/modules/auth/infrastructure/firebase/config"
 
 export default defineEventHandler(async (event) => {
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     const { email, password } = body
     const auth = getFirebaseAuth()
     try {
-        const newUser = await signupWithEmail({ auth, email, password})
+        const newUser = await signUpWithEmail({ auth, email, password})
         return {
             newUser
         }

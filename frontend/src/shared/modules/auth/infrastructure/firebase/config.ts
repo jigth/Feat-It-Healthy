@@ -26,6 +26,6 @@ export const getFirebaseAuth = (): FirebaseAuth => {
     } catch (err: any) {
         const errorMsg = `Error while initializing auth ${err}`
         console.log(errorMsg)
-        throw Error(errorMsg)
+        throw new Error(errorMsg)
     }
 }

@@ -1,4 +1,4 @@
-import { signinWithEmail } from "~/src/shared/modules/auth/infrastructure/firebase"
+import { signInWithEmail } from "~/src/shared/modules/auth/infrastructure/firebase"
 import { getFirebaseAuth } from "~/src/shared/modules/auth/infrastructure/firebase/config"
 
 export default defineEventHandler(async (event) => {
@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
     const { email, password } = body
     const auth = getFirebaseAuth()
     try {
-        const loggedInUser = await signinWithEmail({ auth, email, password})
+        const loggedInUser = await signInWithEmail({ auth, email, password})
         return {
             loggedInUser
         }

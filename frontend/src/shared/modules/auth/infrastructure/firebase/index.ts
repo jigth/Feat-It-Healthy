@@ -5,7 +5,7 @@ import {
 } from 'firebase/auth'
 import type { AuthDetailsEmailPassword } from './models';
 
-export const signupWithEmail = async (signupDetails: AuthDetailsEmailPassword): Promise<UserCredential> => {
+export const signUpWithEmail = async (signupDetails: AuthDetailsEmailPassword): Promise<UserCredential> => {
     const { auth, email, password } = signupDetails
     try {
         const newUser = await createUserWithEmailAndPassword(auth, email, password)
@@ -13,17 +13,17 @@ export const signupWithEmail = async (signupDetails: AuthDetailsEmailPassword): 
     } catch (err: any) {
         const errorMsg = `Error while signing up user ${err}`
         console.log(errorMsg)
-        throw Error(errorMsg)
+        throw new Error(errorMsg)
     }
 }
 
-export const signinWithEmail = async (signupDetails: AuthDetailsEmailPassword): Promise<UserCredential> => {
+export const signInWithEmail = async (signupDetails: AuthDetailsEmailPassword): Promise<UserCredential> => {
     const { auth, email, password } = signupDetails
     try {
         return await signInWithEmailAndPassword(auth, email, password)
     } catch (err: any) {
         const errorMsg = `Error while signing up user ${err}`
         console.log(errorMsg)
-        throw Error(errorMsg)
+        throw new Error(errorMsg)
     }
 }

@@ -16,7 +16,7 @@ export class ProductsRepository extends Repository<Product> implements IProducts
             return await this.repo.find()
         } catch (err) {
             console.log(err)
-            throw Error("Error getting products")
+            throw new Error("Error getting products")
         }
     }
 
@@ -29,7 +29,7 @@ export class ProductsRepository extends Repository<Product> implements IProducts
             return product;
         } catch (err) {
             console.log(err)
-            throw Error("Error getting product")
+            throw new Error("Error getting product")
         }
     }
 
@@ -41,7 +41,7 @@ export class ProductsRepository extends Repository<Product> implements IProducts
             return newProduct;
         } catch (err) {
             console.log(err)
-            throw Error("Error creating product")
+            throw new Error("Error creating product")
         }
     }
 
@@ -57,7 +57,7 @@ export class ProductsRepository extends Repository<Product> implements IProducts
             return product
         } catch (err) {
             console.log(err)
-            throw Error("Error deleting product")
+            throw new Error("Error deleting product")
         }
     }
 
@@ -79,7 +79,7 @@ export class ProductsRepository extends Repository<Product> implements IProducts
             return product
         } catch (err) {
             console.log(err)
-            throw Error("Error updating product")
+            throw new Error("Error updating product")
         }
     }
 }
