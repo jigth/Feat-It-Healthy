@@ -1,13 +1,9 @@
 <template>
-    <h1 class="page-title">{{ welcomeMessage }}</h1>
-    <SignUpForm />
-    <SignInForm />
+    <h1 style="text-align: center;">{{ welcomeMessage }}</h1>
 </template>
 
 <script setup lang="ts">
-import SignInForm from "../shared/modules/auth/infrastructure/components/SignInForm.vue"
-import SignUpForm from "../shared/modules/auth/infrastructure/components/SignUpForm.vue"
-const welcomeMessage: string = "Welcome to Feat It";
+const welcomeMessage: string = "Welcome to Feat It Healthy";
 </script>
 
 <style scoped lang="scss">

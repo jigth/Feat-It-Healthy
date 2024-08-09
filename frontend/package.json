@@ -12,14 +12,19 @@
   "dependencies": {
     "@pinia/nuxt": "^0.5.3",
     "axios": "^1.6.8",
+    "cookie": "^0.6.0",
     "firebase": "^10.12.1",
+    "nuxt": "^3.12.4",
     "pinia": "^2.2.1",
     "sass": "^1.76.0",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue3-toastify": "^0.2.2"
   },
   "devDependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
-    "@types/firebase": "^3.2.1"
+    "@types/cookie": "^0.6.0",
+    "@types/firebase": "^3.2.1",
+    "prettier": "^3.3.3"
   }
 }

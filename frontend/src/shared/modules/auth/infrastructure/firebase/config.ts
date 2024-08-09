@@ -1,27 +1,24 @@
 import { getAuth, type Auth as FirebaseAuth } from "firebase/auth"
-import { initializeApp, type FirebaseApp } from "firebase/app"
+import { getApps, initializeApp, type FirebaseApp } from "firebase/app"
+import type { RuntimeConfig } from "nuxt/schema"
 
-const getFirebaseApp = (): FirebaseApp => {
+const getFirebaseApp = (config: RuntimeConfig): FirebaseApp => {
+    const apiKey = config.public.FB_API_KEY
     const firebaseConfig = {
-        apiKey: process.env.FB_API_KEY,
-        authDomain: process.env.FB_AUTH_DOMAIN,
-        projectId: process.env.FB_PROJECT_ID,
-        storageBucket: process.env.FB_STORAGE_BUCKET,
-        messagingSenderId: process.env.FB_MESSAGING_SENDER_ID,
-        appId: process.env.FB_APP_ID,
-        measurementId: process.env.FB_MEASUREMENT_ID,
+        apiKey,
     }
-    
-    // @ts-ignore
-    const app: FirebaseApp = initializeApp(firebaseConfig);
-    
-    return app;
+
+    // Prevents reinitialization of Firebase app
+    if (!getApps.length) {
+        return initializeApp(firebaseConfig);
+    }
+    return getApps()[0]
 }
 
 /** Get Firebase authentication object, behaving as a Singleton because NodeJS internal cache */
-export const getFirebaseAuth = (): FirebaseAuth => {
+export const getFirebaseAuth = (config: RuntimeConfig): FirebaseAuth => {
     try {
-        const auth = getAuth(getFirebaseApp())
+        const auth = getAuth(getFirebaseApp(config))
         return auth
     } catch (err: any) {
         const errorMsg = `Error while initializing auth ${err}`

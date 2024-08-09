@@ -1,5 +1,5 @@
 <template>
-    <h1 style="margin-left: 1.5rem; margin-top: 1rem;">Products Management</h1>
+    <h1 style="margin-left: 1.5rem; margin-top: 1rem; text-align: center">Products Management</h1>
 
     <h2 style="text-align: center; margin-bottom: 1rem;">New Product</h2>
     <form class="product-form">
@@ -24,7 +24,7 @@
         </button>
     </form>
 
-    <h2>Product List</h2>
+    <h2 style="text-align: center;">Product List</h2>
     <ul>
         <li v-for="(product, i) in products">{{ product }}</li>
     </ul>

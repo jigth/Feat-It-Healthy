@@ -1,6 +1,6 @@
 <template>
     <form class="form">
-        <h2 class="form-title">SignUp</h2>
+        <h1 class="form-title">SignUp</h1>
         
         <div class="form-field">
             <label>Email</label>
