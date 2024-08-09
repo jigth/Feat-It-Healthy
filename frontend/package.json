@@ -10,9 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.3",
     "axios": "^1.6.8",
     "firebase": "^10.12.1",
-    "nuxt": "^3.11.2",
+    "pinia": "^2.2.1",
     "sass": "^1.76.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"

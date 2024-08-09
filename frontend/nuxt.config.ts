@@ -12,6 +12,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@pinia/nuxt',
     ['@nuxtjs/google-fonts', {
       families: {
         Poppins: true,
