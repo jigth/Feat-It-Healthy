@@ -13,45 +13,45 @@ export class ProductsService implements IProductService {
     async getAll(): Promise<Product[]> {
         try {
             return await this.productsRepo.getAll()
-        } catch (err) {
+        } catch (err: unknown) {
             console.log(err)
-            throw new Error("Error while getting products")
+            throw new Error(`Error while getting products ${(err as Error).message}`)
         }
     }
 
     async getProductById(id: string): Promise<Product | null> {
         try {
             return await this.productsRepo.getProductById(id)
-        } catch (err) {
+        } catch (err: unknown) {
             console.log(err)
-            throw new Error("Error while getting the product")
+            throw new Error(`Error while getting the product. ${(err as Error).message}`)
         }
     }
 
     async createProduct(productInfo: Product): Promise<Product> {
         try {
             return await this.productsRepo.createProduct(productInfo)
-        } catch (err) {
+        } catch (err: unknown) {
             console.log(err)
-            throw new Error("Error while creating the product")
+            throw new Error(`Error while creating the product. ${(err as Error).message}`)
         }
     }
 
     async updateProduct(updatedProductInfo: Product): Promise<Product | null> {
         try {
             return await this.productsRepo.updateProduct(updatedProductInfo)
-        } catch (err) {
+        } catch (err: unknown) {
             console.log(err)
-            throw new Error("Error while updating the product")
+            throw new Error(`Error while updating the product. ${(err as Error).message}`)
         }
     }
 
     async deleteProduct(id: string): Promise<Product | null> {
         try {
             return await this.productsRepo.deleteProduct(id)
-        } catch (err) {
+        } catch (err: unknown) {
             console.log(err)
-            throw new Error("Error while deleting the product")
+            throw new Error(`Error while deleting the product. ${(err as Error).message}`)
         }
     }
 }
